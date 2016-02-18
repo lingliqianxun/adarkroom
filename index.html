@@ -1,84 +1,112 @@
 <!DOCTYPE html>
-<html lang="en-us">
-  <head>
-    <meta charset="UTF-8">
-    <title>Adarkroom by lingliqianxun</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
-  </head>
-  <body>
-    <section class="page-header">
-      <h1 class="project-name">Adarkroom</h1>
-      <h2 class="project-tagline"></h2>
-      <a href="https://github.com/lingliqianxun/adarkroom" class="btn">View on GitHub</a>
-      <a href="https://github.com/lingliqianxun/adarkroom/zipball/master" class="btn">Download .zip</a>
-      <a href="https://github.com/lingliqianxun/adarkroom/tarball/master" class="btn">Download .tar.gz</a>
-    </section>
+<html itemscope itemtype="http://schema.org/CreativeWork">
+<head>
+	<meta charset="UTF-8"/>
+	<!--  
+		A Dark Room (v1.4)
+		==================
+		
+		A minimalist text adventure by Michael Townsend and all his friends.
+		Inspired by Candy Box (http://candies.aniwey.net/)
+		Contribute on GitHub! (https://github.com/doublespeakgames/adarkroom/)
+	-->
+	<title>A Dark Room</title>
+	<meta itemprop="description" name="description" property="og:description" content="A minimalist text adventure">
+	<meta itemprop="image" property="og:image" content="img/adr.png" />
+	<meta itemprop="name" property="og:title" content="A Dark Room" />
+	<link rel="shortcut icon" href="favicon.ico" />
+	<link rel="image_src" href="img/adr.png" />
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+	<script src="https://www.dropbox.com/static/api/dropbox-datastores-1.1-latest.js" type="text/javascript"></script>
+	<script>
+		if(!window.jQuery) {
+			document.write('<script src="lib/jquery.min.js"><\/script>')
+		}
+	</script>
+	<script src="lib/jquery.color-2.1.2.min.js"></script>
+	<script src="lib/jquery.event.move.js"></script>
+	<script src="lib/jquery.event.swipe.js"></script>
+	<script src="lib/base64.js"></script>
+	<script src="lib/translate.js"></script>
+	
+	<script src="lang/langs.js"></script>
+	
+	<script>
+		// try to read "lang" param's from url
+		var lang = decodeURIComponent((new RegExp('[?|&]lang=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null;
+		// if no language requested, try to read it from local storage
+		if(!lang){
+			try {
+				lang = localStorage.lang;
+			} catch(e) {}
+		}
+		// if a language different than english requested, load all translations
+		if(lang && lang != 'en'){
+			document.write('<script src="lang/'+lang+'/strings.js"><\/script>');
+			document.write('<link rel="stylesheet" type="text/css" href="lang/'+lang+'/main.css" \/>');
+		}
+	</script>
+	
+	<script src="script/Button.js"></script>
+	<script src="script/engine.js"></script>
+	<script src="script/state_manager.js"></script>
+	<script src="script/header.js"></script>
+	<script src="script/notifications.js"></script>
+	<script src="script/events.js"></script>
+	<script src="script/dropbox.js"></script>
+	<script src="script/room.js"></script>
+	<script src="script/outside.js"></script>
+	<script src="script/world.js"></script>
+	<script src="script/path.js"></script>
+	<script src="script/ship.js"></script>
+	<script src="script/space.js"></script>
+	<script src="script/prestige.js"></script>
+	<script src="script/scoring.js"></script>
+	<!-- Event modules -->
+	<script src="script/events/global.js"></script>
+	<script src="script/events/room.js"></script>
+	<script src="script/events/outside.js"></script>
+	<script src="script/events/encounters.js"></script>
+	<script src="script/events/setpieces.js"></script>
+	
+	<script type='text/javascript'>
+		var oldIE = false;
+	</script>
+	<!--[if lt IE 9]> 
+		<script type="text/javascript">oldIE = true;</script> 
+	<![endif]-->
+	
+	<link rel="stylesheet" type="text/css" href="css/main.css" />
+	<link rel="stylesheet" type="text/css" href="css/room.css" />
+	<link rel="stylesheet" type="text/css" href="css/outside.css" />
+	<link rel="stylesheet" type="text/css" href="css/path.css" />
+	<link rel="stylesheet" type="text/css" href="css/world.css" />
+	<link rel="stylesheet" type="text/css" href="css/ship.css" />
+	<link rel="stylesheet" type="text/css" href="css/space.css" />
+	
+	<script src="script/localization.js"></script>
+	<!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','http://www.google-analytics.com/analytics.js','ga');
 
-    <section class="main-content">
-      <h1>
-<a id="a-dark-room" class="anchor" href="#a-dark-room" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>A Dark Room</h1>
-
-<blockquote>
-<p>"awake. head throbbing. vision blurry. come light the fire."</p>
-</blockquote>
-
-<p>a minimalist text adventure game for your browser</p>
-
-<p><a href="http://adarkroom.doublespeakgames.com">Click to play</a></p>
-
-<table>
-<tr><th colspan="4">Available Languages</th></tr>
-<tr>
-    <td><a href="http://adarkroom.doublespeakgames.com/?lang=zh_cn">Chinese (Simplified)</a></td>
-    <td><a href="http://adarkroom.doublespeakgames.com/?lang=zh_tw">Chinese (Traditional)</a></td>
-    <td><a href="http://adarkroom.doublespeakgames.com/?lang=en">English</a></td>
-    <td><a href="http://adarkroom.doublespeakgames.com/?lang=fr">French</a></td>
-</tr>
-<tr>
-    <td><a href="http://adarkroom.doublespeakgames.com/?lang=de">German</a></td>
-    <td><a href="http://adarkroom.doublespeakgames.com/?lang=el">Greek</a></td>
-    <td><a href="http://adarkroom.doublespeakgames.com/?lang=id">Indonesian</a></td>
-    <td><a href="http://adarkroom.doublespeakgames.com/?lang=it">Italian</a></td>
-</tr>
-<tr>
-    <td><a href="http://adarkroom.doublespeakgames.com/?lang=ja">Japanese</a></td>
-    <td><a href="http://adarkroom.doublespeakgames.com/?lang=ko">Korean</a></td>
-    <td><a href="http://adarkroom.doublespeakgames.com/?lang=nb">Norwegian</a></td>
-    <td><a href="http://adarkroom.doublespeakgames.com/?lang=pl">Polish</a></td>
-</tr>
-<tr>
-    <td><a href="http://adarkroom.doublespeakgames.com/?lang=pt">Portuguese</a></td>
-    <td><a href="http://adarkroom.doublespeakgames.com/?lang=pt_br">Portuguese (Brazil)</a></td>
-    <td><a href="http://adarkroom.doublespeakgames.com/?lang=ru">Russian</a></td>
-    <td><a href="http://adarkroom.doublespeakgames.com/?lang=es">Spanish</a></td>
-</tr>
-<tr>
-    <td><a href="http://adarkroom.doublespeakgames.com/?lang=sv">Swedish</a></td>
-    <td><a href="http://adarkroom.doublespeakgames.com/?lang=th">Thai</a></td>
-    <td><a href="http://adarkroom.doublespeakgames.com/?lang=tr">Turkish</a></td>
-    <td><a href="http://adarkroom.doublespeakgames.com/?lang=uk">Ukrainian</a></td>
-</tr>
-<tr>
-    <td><a href="http://adarkroom.doublespeakgames.com/?lang=vi">Vietnamese</a></td>
-</tr>
-</table>
-
-<p>or play the latest on <a href="http://doublespeakgames.github.io/adarkroom">GitHub</a></p>
-
-<p><a href="https://itunes.apple.com/us/app/a-dark-room/id736683061"><img src="http://i.imgur.com/M6jlJQH.png" alt="app store"></a></p>
-
-      <footer class="site-footer">
-        <span class="site-footer-owner"><a href="https://github.com/lingliqianxun/adarkroom">Adarkroom</a> is maintained by <a href="https://github.com/lingliqianxun">lingliqianxun</a>.</span>
-
-        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
-      </footer>
-
-    </section>
-
-  
-  </body>
+		ga('create', 'UA-41314886-1', 'doublespeakgames.com');
+		ga('send', 'pageview');
+	</script>
+	
+</head>
+<body>
+	<div id="wrapper">
+		<div id="saveNotify"><script>document.write(_("saved."));</script></div>
+		<div id="content">
+			<div id="outerSlider">
+				<div id="main">
+					<div id="header"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
 </html>
